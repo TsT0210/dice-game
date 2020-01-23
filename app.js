@@ -12,12 +12,13 @@ var diceNumber = Math.floor(Math.random() * 6) + 1;
 
 var diceDom = document.querySelector(".dice");
 
-diceDom.style.display = 'none';
 document.getElementById('score-0').textContent = 0;
 document.getElementById('score-1').textContent = 0;
 
 document.getElementById('current-0').textContent = 0;
 document.getElementById('current-1').textContent = 0;
+
+diceDom.style.display = 'none';
 
 // Шоог шидэх эвент листенер 
 document.querySelector(".btn-roll").addEventListener("click", function() {
@@ -43,7 +44,7 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
   document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
   // hojson esehiig shalgah
 
-  if(scores[activePlayer] >= 100){
+  if(scores[activePlayer] >= 10){
     document.getElementById('name-' + activePlayer).textContent = 'Та Ялагч боллоо!!!';
     document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
     document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
@@ -68,3 +69,34 @@ function switchToNextPlayer(){
 
       diceDom.style.display = "none";
 }
+
+// shine togloom ehlvvleh towwchnii event
+
+document.querySelector('.btn-new').addEventListener('click', function(){
+  activePlayer = 0;
+
+// Тоглогчийн цуглуулсан оноог хадгалах хувьсагч
+  scores = [0, 0];
+
+// Тоглогчийн ээлжиндээ цуглуулах оноог хадгалах хувьсагч
+  roundScore = 0;
+
+// Шооны аль талаараа буусныг хадгалах хувьсагч хэрэгтэй, 1-6 гэсэн утгыг энэ хувьсагчид санамсаргүйгээр үүсгэж өгнө.
+document.getElementById('score-0').textContent = 0;
+document.getElementById('score-1').textContent = 0;
+
+document.getElementById('current-0').textContent = 0;
+document.getElementById('current-1').textContent = 0; 
+
+document.getElementById('name-0').textContent = 'Тоглогч 1';
+document.getElementById('name-1').textContent = 'Тоглогч 2';
+document.querySelector('.player-0-panel').classList.remove('winner');
+document.querySelector('.player-1-panel').classList.remove('winner');
+
+document.querySelector('.player-0-panel').classList.remove('active');
+document.querySelector('.player-1-panel').classList.remove('active');
+
+document.querySelector('.player-0-panel').classList.add('active');
+
+diceDom.style.display = 'none';
+})
