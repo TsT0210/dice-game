@@ -31,6 +31,31 @@ document.querySelector(".btn-roll").addEventListener("click", function() {
       document.getElementById('current-' + activePlayer).textContent = roundScore;
     }else{
 
+      switchToNextPlayer();
+    }
+
+});
+
+// Hold товчны эвент листенер
+document.querySelector('.btn-hold').addEventListener('click', function(){
+  scores[activePlayer] = scores[activePlayer] + roundScore;
+
+  document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
+  // hojson esehiig shalgah
+
+  if(scores[activePlayer] >= 100){
+    document.getElementById('name-' + activePlayer).textContent = 'Та Ялагч боллоо!!!';
+    document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+    document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+  }else{
+    switchToNextPlayer();
+  }
+  
+
+  
+});
+
+function switchToNextPlayer(){
       roundScore = 0;
 
       document.getElementById('current-' + activePlayer).textContent = 0;
@@ -42,15 +67,4 @@ document.querySelector(".btn-roll").addEventListener("click", function() {
       document.querySelector('.player-1-panel').classList.toggle("active");
 
       diceDom.style.display = "none";
-
-      
-      // if(activePlayer === 0){
-      //   activePlayer = 1;
-      // }
-      // else{
-      //   activePlayer =0;
-      // }
-    }
-
-
-});
+}
