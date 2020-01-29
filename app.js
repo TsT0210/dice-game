@@ -1,4 +1,5 @@
 // Тоглогчийн ээлж хадгалах хувьсагч
+var isNewGame = true;
 var activePlayer = 0;
 
 // Тоглогчийн цуглуулсан оноог хадгалах хувьсагч
@@ -22,7 +23,8 @@ diceDom.style.display = 'none';
 
 // Шоог шидэх эвент листенер 
 document.querySelector(".btn-roll").addEventListener("click", function() {
-  var diceNumber = Math.floor(Math.random() * 6) + 1;
+  if(isNewGame){
+    var diceNumber = Math.floor(Math.random() * 6) + 1;
   diceDom.style.display = 'block';
   diceDom.src = 'dice-' + diceNumber + ".png";
 
@@ -34,22 +36,30 @@ document.querySelector(".btn-roll").addEventListener("click", function() {
 
       switchToNextPlayer();
     }
+  }else{
+    alert("Тоглоом дууссан байна. NEW GAME товчийг дарж шинээр эхлэнэ үү");
+  }
 
 });
 
 // Hold товчны эвент листенер
 document.querySelector('.btn-hold').addEventListener('click', function(){
-  scores[activePlayer] = scores[activePlayer] + roundScore;
+  if(isNewGame){
+    scores[activePlayer] = scores[activePlayer] + roundScore;
 
   document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
   // hojson esehiig shalgah
 
   if(scores[activePlayer] >= 10){
+    isNewGame = false;
     document.getElementById('name-' + activePlayer).textContent = 'Та Ялагч боллоо!!!';
     document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
     document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
   }else{
     switchToNextPlayer();
+  }
+  }else{
+    alert("Тоглоом дууссан байна. NEW GAME товчийг дарж шинээр эхлэнэ үү");
   }
   
 
@@ -73,6 +83,8 @@ function switchToNextPlayer(){
 // shine togloom ehlvvleh towwchnii event
 
 document.querySelector('.btn-new').addEventListener('click', function(){
+
+  isNewGame = true; 
   activePlayer = 0;
 
 // Тоглогчийн цуглуулсан оноог хадгалах хувьсагч
