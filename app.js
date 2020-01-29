@@ -50,7 +50,7 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
   document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
   // hojson esehiig shalgah
 
-  if(scores[activePlayer] >= 10){
+  if(scores[activePlayer] >= 100){
     isNewGame = false;
     document.getElementById('name-' + activePlayer).textContent = 'Та Ялагч боллоо!!!';
     document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
